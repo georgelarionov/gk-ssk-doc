@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИИ-ХАБ · Отчёт о ходе работ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --surface:#fbfbfa;
+    --surface-2:#f6f5f3;
+    --border:#ececea;
+    --border-strong:#e1e0dd;
+    --text:#23211e;
+    --text-2:#5b5955;
+    --text-3:#928f8a;
+    --red:#ce1f2d;
+    --red-dark:#a3141f;
+    --red-tint:#fceced;
+    --red-tint-2:#f6d8db;
+    --radius:4px;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+    --sans:"Manrope",-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    font-feature-settings:"ss01","cv11";
+  }
+  .topbar{height:3px;background:var(--red)}
+  .wrap{max-width:840px;margin:0 auto;padding:0 28px 96px}
+
+  .backlink{
+    display:inline-flex;align-items:center;gap:7px;margin-top:28px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--text-3);
+    text-decoration:none
+  }
+  .backlink:hover{color:var(--red)}
+
+  /* ---------- header ---------- */
+  header{position:relative;padding:36px 0 8px}
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--red);font-weight:600;display:flex;align-items:center;gap:9px;margin-bottom:18px
+  }
+  .eyebrow .sep{color:var(--text-3)}
+  .eyebrow .muted{color:var(--text-3);font-weight:500}
+  h1{font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.08}
+  h1 .accent{color:var(--red)}
+  .subtitle{color:var(--text-2);font-size:16px;margin-top:12px;max-width:560px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .meta .tag{
+    font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--text-2);
+    background:var(--surface-2);border:1px solid var(--border);border-radius:3px;padding:5px 10px
+  }
+  .meta .tag b{color:var(--text);font-weight:600}
+  .meta .tag.live{background:var(--red-tint);border-color:var(--red-tint-2);color:var(--red-dark)}
+  .meta .tag.live b{color:var(--red-dark)}
+  .meta .tag .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-right:6px;vertical-align:middle}
+
+  .rule{height:1px;background:var(--border);margin:36px 0}
+
+  /* ---------- callout ---------- */
+  .callout{
+    background:var(--red-tint);border:1px solid var(--red-tint-2);border-left:3px solid var(--red);
+    border-radius:0;padding:18px 20px;display:flex;gap:14px;align-items:flex-start
+  }
+  .callout .ic{flex:none;width:22px;height:22px;margin-top:1px}
+  .callout p{font-size:15px;color:#4a2226;line-height:1.6}
+  .callout p b{color:var(--red-dark);font-weight:700}
+
+  /* ---------- sections ---------- */
+  section{margin-top:48px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:22px}
+  .sec-num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--red)}
+  h2{font-size:21px;font-weight:700;letter-spacing:-.01em}
+  .sec-note{font-size:13px;color:var(--text-3);margin-left:auto;font-family:var(--mono)}
+
+  /* ---------- track steppers ---------- */
+  .track{margin-bottom:22px}
+  .track:last-child{margin-bottom:0}
+  .track-label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:11px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;
+    padding:6px 12px;border-radius:3px;border:1px solid var(--border-strong);color:var(--text-3);background:var(--bg)
+  }
+  .chip .cdot{width:7px;height:7px;border-radius:50%;border:1.5px solid var(--text-3);background:transparent}
+  .chip.active{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+  .chip.active .cdot{background:#fff;border-color:#fff}
+
+  /* ---------- goals grid ---------- */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.cols{grid-template-columns:1fr}}
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px}
+  .panel h3{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+  ul.clean{list-style:none;display:flex;flex-direction:column;gap:11px}
+  ul.clean li{position:relative;padding-left:26px;font-size:14.5px;color:var(--text)}
+  ul.clean li::before{
+    content:"";position:absolute;left:0;top:7px;width:14px;height:14px;
+    background:no-repeat center/14px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ce1f2d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E")
+  }
+  ul.clean li .date{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--red);display:block;margin-bottom:1px}
+  ul.clean li span.t{color:var(--text-2);font-size:13.5px}
+
+  /* ---------- done cards ---------- */
+  .card{
+    background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);
+    padding:22px 24px;margin-bottom:14px;border-left:3px solid var(--red)
+  }
+  .card-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .card-top h3{font-size:17px;font-weight:700}
+  .badge{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.03em;padding:4px 9px;border-radius:3px}
+  .badge.work{background:var(--red-tint);color:var(--red-dark);border:1px solid var(--red-tint-2)}
+  .badge.prog{background:var(--surface-2);color:var(--text-2);border:1px solid var(--border-strong)}
+  .badge .pct{color:var(--red-dark)}
+  .bar{height:5px;background:var(--surface-2);border-radius:2px;overflow:hidden;margin-left:auto;width:90px}
+  .bar i{display:block;height:100%;background:var(--red);border-radius:2px}
+  .card p.lead{font-size:14.5px;color:var(--text);margin-bottom:12px}
+  .card .label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin:14px 0 9px}
+  ul.dash{list-style:none;display:flex;flex-direction:column;gap:8px}
+  ul.dash li{position:relative;padding-left:18px;font-size:14px;color:var(--text-2);line-height:1.5}
+  ul.dash li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--red);opacity:.55}
+  ul.dash li b{color:var(--text);font-weight:600}
+
+  /* ---------- gantt ---------- */
+  .gantt-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:4px}
+  .gantt{min-width:600px}
+  .gantt .axis{display:grid;grid-template-columns:184px 1fr}
+  .gantt .axis .scale{position:relative;height:16px}
+  .gantt .axis .scale span{position:absolute;top:0;font-family:var(--mono);font-size:11px;color:var(--text-3);transform:translateX(-50%);white-space:nowrap}
+  .gantt .axis .scale span.first{transform:none}
+  .gantt .axis .scale span.last{transform:translateX(-100%)}
+  .gantt .axis .scale span.today-lbl{color:var(--red);font-weight:600}
+  .gbody{position:relative}
+  .gbody .overlay{position:absolute;top:0;bottom:0;left:184px;right:0;pointer-events:none}
+  .gbody .overlay .gl{position:absolute;top:0;bottom:0;width:1px;background:var(--border)}
+  .gbody .overlay .today{position:absolute;top:0;bottom:0;width:2px;background:var(--red);transform:translateX(-1px)}
+  .ggroup{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text-3);margin:18px 0 9px}
+  .ggroup:first-of-type{margin-top:10px}
+  .grow{display:grid;grid-template-columns:184px 1fr;align-items:center;min-height:36px}
+  .grow .gname{font-size:14px;color:var(--text);padding-right:16px;line-height:1.2}
+  .grow .gname small{display:block;font-size:11px;color:var(--text-3);font-family:var(--mono);margin-top:2px;letter-spacing:.01em}
+  .gtrack{position:relative;height:24px}
+  .gbar{position:absolute;top:0;height:24px;border-radius:3px;overflow:hidden}
+  .gbar.prog{background:var(--red-tint-2)}
+  .gbar.prog i{position:absolute;left:0;top:0;bottom:0;background:var(--red)}
+  .gbar.future{background:var(--surface-2);border:1px solid var(--border-strong)}
+  .gbar.tent{background:repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 5px,#ece9e6 5px,#ece9e6 10px);border:1px solid var(--border-strong)}
+  .glegend{display:flex;flex-wrap:wrap;gap:18px 20px;margin-top:18px;padding-top:15px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text-3)}
+  .glegend span{display:inline-flex;align-items:center;gap:7px}
+  .glegend i{width:18px;height:11px;border-radius:2px;display:inline-block;flex:none}
+  .glegend .lg-prog{background:var(--red)}
+  .glegend .lg-fut{background:var(--surface-2);border:1px solid var(--border-strong)}
+  .glegend .lg-tent{background:repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 4px,#ece9e6 4px,#ece9e6 8px);border:1px solid var(--border-strong)}
+  .glegend .lg-today{width:2px;height:14px;background:var(--red);border-radius:0}
+  .gscroll-hint{display:none}
+  @media(max-width:640px){
+    .gscroll-hint{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--text-3);margin-top:10px}
+    .gantt-scroll{margin-right:-28px;padding-right:28px}
+  }
+
+  /* ---------- footer ---------- */
+  footer{margin-top:64px;padding-top:28px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+  .fwordmark{font-size:22px;font-weight:800;letter-spacing:.02em;color:var(--text)}
+  .fwordmark .accent{color:var(--red)}
+  .contact{font-family:var(--mono);font-size:12.5px;color:var(--text-2);line-height:1.9;text-align:right}
+  .contact .muted{color:var(--text-3)}
+
+  /* ---------- entrance ---------- */
+  .reveal{opacity:0;transform:translateY(14px);animation:rise .6s cubic-bezier(.22,.61,.36,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}.meta .tag .dot{animation:none}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<div class="wrap">
+
+  <a class="backlink" href="../index.html">← Все отчёты</a>
+
+  <!-- HEADER -->
+  <header class="reveal" style="animation-delay:.02s">
+    <div class="eyebrow">ИИ-ХАБ <span class="sep">×</span> ГК «ССК» <span class="sep">·</span> <span class="muted">Отчёт о ходе работ</span></div>
+    <h1>Отчет&nbsp;<span class="accent">ИИ-хаб</span></h1>
+    <p class="subtitle">Первый этап — «Проектирование и погружение». В работе три согласованные направления: прототип, дизайн-система и оцифровка первого бизнес-процесса.</p>
+    <div class="meta">
+      <span class="tag"><b>Отчетный период:</b> 25 мая — 1 июня 2026</span>
+    </div>
+  </header>
+
+  <div class="rule"></div>
+
+  <!-- 1. ЭТАПЫ ПРОЕКТА -->
+  <section class="reveal" style="animation-delay:.14s">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>Статус проекта</h2>
+      <span class="sec-note">этапы</span>
+    </div>
+    <div class="track">
+      <div class="track-label">Платформа</div>
+      <div class="chips">
+        <span class="chip active"><span class="cdot"></span>Прототип</span>
+        <span class="chip active"><span class="cdot"></span>Дизайн-система</span>
+        <span class="chip"><span class="cdot"></span>Backend</span>
+        <span class="chip"><span class="cdot"></span>Интеграции</span>
+        <span class="chip"><span class="cdot"></span>Frontend</span>
+        <span class="chip"><span class="cdot"></span>Тестирование</span>
+        <span class="chip"><span class="cdot"></span>Развёртывание</span>
+      </div>
+    </div>
+    <div class="track">
+      <div class="track-label">Оцифровка процесса</div>
+      <div class="chips">
+        <span class="chip active"><span class="cdot"></span>Погружение</span>
+        <span class="chip active"><span class="cdot"></span>Проектирование</span>
+        <span class="chip"><span class="cdot"></span>Инструкции</span>
+        <span class="chip"><span class="cdot"></span>Пилот</span>
+        <span class="chip"><span class="cdot"></span>Боевой режим</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ЗАДАЧИ И ЦЕЛИ -->
+  <section class="reveal" style="animation-delay:.2s">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>Задачи и цели</h2>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>В работе сейчас</h3>
+        <ul class="clean">
+          <li>Прототип платформы <span class="t">— подготовка к согласованию и финализация</span></li>
+          <li>Дизайн-система <span class="t">— на базе фирменного стиля ГК «ССК»</span></li>
+          <li>Оцифровка первого бизнес-процесса <span class="t">— от брифа до схемы для пилота</span></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Ближайшие цели</h3>
+        <ul class="clean">
+          <li><span class="date">8 июня · пн</span>Запуск тестового агента в рамках выбранного бизнес-процесса</li>
+          <li><span class="date">до 12 – 15 июня</span>Развёртывание первой версии платформы не менее 50% экранов в соответствии прототипа</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ЧТО СДЕЛАНО -->
+  <section class="reveal" style="animation-delay:.26s">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>Что сделано за неделю</h2>
+      <span class="sec-note">25 мая — 1 июня</span>
+    </div>
+
+    <!-- Прототип -->
+    <div class="card">
+      <div class="card-top">
+        <h3>Прототип</h3>
+        <span class="badge work">Готов к первому согласованию</span>
+      </div>
+      <p class="lead">Собран прототип платформы — структура экранов, навигация и первичная логика работы объектов системы.</p>
+      <div class="label">В работе</div>
+      <ul class="dash">
+        <li><b>1 июня</b> — звонок по первичному согласованию с Юрием.</li>
+        <li><b>До 5 июня</b> — правки по итогам согласования и финализация.</li>
+        <li>Презентация финальной версии прототипа.</li>
+      </ul>
+    </div>
+
+    <!-- Дизайн-система -->
+    <div class="card">
+      <div class="card-top">
+        <h3>Дизайн-система</h3>
+        <span class="badge prog">Готовность <span class="pct">65%</span></span>
+        <span class="bar"><i style="width:65%"></i></span>
+      </div>
+      <p class="lead">Палитра, типографика и библиотека UI-компонентов на основе фирменного стиля ГК «ССК».</p>
+      <div class="label">В работе</div>
+      <ul class="dash">
+        <li><b>До 5 июня</b> — дизайн-система готова.</li>
+        <li>Презентация в формате веб-версии — со ссылкой на компоненты и примеры экранов.</li>
+      </ul>
+    </div>
+
+    <!-- Погружение -->
+    <div class="card">
+      <div class="card-top">
+        <h3>Оцифровка процесса · погружение</h3>
+        <span class="badge work">В работе</span>
+      </div>
+      <p class="lead">Отправлен бриф, выбран первый бизнес-процесс, подготовлена схема для первичного согласования (звонок 1 июня). Цель — финальная схема процесса для запуска пилота.</p>
+      <div class="label">В работе</div>
+      <ul class="dash">
+        <li><b>Схема бизнес-процесса</b> — финальная версия для пилота.</li>
+        <li><b>Техническая инфраструктура</b> — подбор моделей агентов и решений для интеграции с email-клиентом и файловой системой.</li>
+        <li><b>Детерминированные сценарии</b> — где работа агента жёстко валидируется, а где он выполняет готовый скрипт.</li>
+        <li><b>Первичные тестовые инструкции</b> агента для проверки в рамках процесса.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. ТАЙМЛАЙН -->
+  <section class="reveal" style="animation-delay:.32s">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>Таймлайн</h2>
+    </div>
+    <div class="gantt-scroll">
+    <div class="gantt">
+      <div class="axis">
+        <div></div>
+        <div class="scale">
+          <span class="first" style="left:0%">25 мая</span>
+          <span class="today-lbl" style="left:25%">1 июня</span>
+          <span style="left:50%">8 июня</span>
+          <span style="left:75%">15 июня</span>
+          <span class="last" style="left:100%">22 июня</span>
+        </div>
+      </div>
+      <div class="gbody">
+        <div class="overlay">
+          <div class="gl" style="left:0%"></div>
+          <div class="gl" style="left:50%"></div>
+          <div class="gl" style="left:75%"></div>
+          <div class="gl" style="left:100%"></div>
+          <div class="today" style="left:25%"></div>
+        </div>
+
+        <div class="ggroup">Платформа</div>
+        <div class="grow">
+          <div class="gname">Прототип<small>25 мая – 5 июня</small></div>
+          <div class="gtrack"><div class="gbar prog" style="left:0%;width:39.29%"><i style="width:63.63%"></i></div></div>
+        </div>
+        <div class="grow">
+          <div class="gname">Дизайн-система<small>25 мая – 5 июня · 65%</small></div>
+          <div class="gtrack"><div class="gbar prog" style="left:0%;width:39.29%"><i style="width:63.63%"></i></div></div>
+        </div>
+        <div class="grow">
+          <div class="gname">Первая версия платформы, развёртывание, разработка<small>1 – 22 июня</small></div>
+          <div class="gtrack"><div class="gbar prog" style="left:25%;width:75%"><i style="width:0%"></i></div></div>
+        </div>
+
+        <div class="ggroup">Оцифровка процесса</div>
+        <div class="grow">
+          <div class="gname">Схема БП · погружение<small>25 мая – 8 июня</small></div>
+          <div class="gtrack"><div class="gbar prog" style="left:0%;width:50%"><i style="width:50%"></i></div></div>
+        </div>
+        <div class="grow">
+          <div class="gname">Первичный запуск, сбор обратной связи<small>8 – 15 июня</small></div>
+          <div class="gtrack"><div class="gbar future" style="left:50%;width:25%"></div></div>
+        </div>
+        <div class="grow">
+          <div class="gname">Пилот<small>с 15 июня</small></div>
+          <div class="gtrack"><div class="gbar tent" style="left:75%;width:25%"></div></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <p class="gscroll-hint">↔ прокрутите вправо, чтобы увидеть весь график</p>
+
+      <div class="glegend">
+        <span><i class="lg-prog"></i>в работе</span>
+        <span><i class="lg-fut"></i>запланировано</span>
+        <span><i class="lg-tent"></i>далее</span>
+        <span><i class="lg-today"></i>сегодня · 1 июня</span>
+      </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="reveal" style="animation-delay:.38s">
+    <div class="fwordmark">ИИ<span class="accent">—</span>ХАБ</div>
+    <div class="contact">
+      george@oneclick.life<br>
+      +7 977 830 18 72<br>
+      @GeorgeLarionov <span class="muted">(TG)</span>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

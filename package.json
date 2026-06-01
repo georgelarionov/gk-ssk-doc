@@ -1,0 +1,19 @@
+{
+  "name": "gk-ssk-doc",
+  "version": "1.0.0",
+  "description": "Мини-проект со статичными страницами отчётов",
+  "private": true,
+  "scripts": {
+    "start": "live-server --port=3000 --no-browser",
+    "dev": "live-server --port=3000"
+  },
+  "keywords": [
+    "reports",
+    "static"
+  ],
+  "author": "georgelarionov",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
