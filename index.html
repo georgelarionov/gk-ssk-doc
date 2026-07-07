@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Отчёты · ГК «ССК» × ИИ-ХАБ</title>
+  <title>Статус задач · ГК «ССК» × ИИ-ХАБ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,80 +15,394 @@
 
     <!-- HEADER -->
     <header class="page-header reveal" style="animation-delay:.02s">
-      <div class="eyebrow">ИИ-ХАБ <span class="sep">×</span> ГК «ССК» <span class="sep">·</span> <span class="muted">Отчёты</span></div>
-      <h1>Отчёты <span class="accent">ГК «ССК»</span></h1>
-      <p class="subtitle">Отчёты о ходе работ по проекту ИИ-ХАБ. Выберите отчёт, чтобы открыть подробности.</p>
+      <div class="eyebrow">ИИ-ХАБ <span class="sep">×</span> ГК «ССК» <span class="sep">·</span> <span class="muted">Статус задач</span></div>
+      <h1>Прогресс <span class="accent">по задачам</span></h1>
+      <p class="subtitle">Живой обзор работ по проекту ИИ-ХАБ. Две линии: оцифровка бизнес-процессов и разработка платформы — с текущим статусом, ближайшими шагами и вехами.</p>
+      <div class="meta">
+        <span class="tag"><b>Обновлено:</b> 7 июля 2026</span>
+        <span class="tag">5 бизнес-процессов</span>
+        <span class="tag live"><span class="dot"></span><b>Релиз V0.1 Stable:</b> 10 июля</span>
+      </div>
     </header>
 
     <div class="rule"></div>
 
-    <!-- REPORTS GRID -->
-    <section class="reveal" style="animation-delay:.14s">
-      <div class="grid-head">
+    <!-- FOCUS -->
+    <div class="focus reveal" style="animation-delay:.06s">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#ce1f2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      <p>
+        <span class="flabel">Фокус недели · 7 — 11 июля</span>
+        <b>Релиз платформы V0.1 Stable к пятнице 10 июля</b> и финализация БП «Расчёт ЗП» (контур кадров): в пятницу — сверка автоматической сводной таблицы с ручной у Натальи Гвазюк, далее 13–14 июля — согласование и старт тиражирования на другие организации.
+      </p>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats reveal" style="animation-delay:.1s">
+      <div class="stat">
+        <div class="s-num">5</div>
+        <div class="s-lbl">Бизнес-<br>процессов</div>
+      </div>
+      <div class="stat">
+        <div class="s-num">3</div>
+        <div class="s-lbl">В активной<br>работе</div>
+      </div>
+      <div class="stat warn">
+        <div class="s-num">2</div>
+        <div class="s-lbl">Блокера ·<br>нужно действие</div>
+      </div>
+    </div>
+
+    <!-- 01 · БИЗНЕС-ПРОЦЕССЫ -->
+    <section class="block reveal" style="animation-delay:.16s">
+      <div class="sec-head">
         <span class="sec-num">01</span>
-        <h2>Все отчёты</h2>
-        <span class="count">4 отчёта</span>
+        <h2>Бизнес-процессы</h2>
+        <span class="sec-note">4 процесса</span>
       </div>
 
-      <ul class="report-grid">
-        <li>
-          <a class="report-card" href="reports/ii-hab.html">
-            <span class="rc-period">25 мая — 1 июня 2026</span>
-            <h3>Отчёт ИИ-ХАБ</h3>
-            <p class="rc-desc">Первый этап — «Проектирование и погружение»: прототип, дизайн-система и оцифровка первого бизнес-процесса.</p>
-            <span class="rc-foot">
-              <span class="status"><span class="dot"></span>в рамках графика</span>
-              <span>Неделя 1</span>
-              <span class="arrow">→</span>
-            </span>
-          </a>
-        </li>
+      <div class="tasks">
 
-        <li>
-          <a class="report-card" href="reports/ii-hab-2.html">
-            <span class="rc-period">1 — 5 июня 2026</span>
-            <h3>Отчёт ИИ-ХАБ</h3>
-            <p class="rc-desc">Завершение первого этапа: прототип и дизайн-система готовы, схема первого бизнес-процесса завершена, начата разработка платформы.</p>
-            <span class="rc-foot">
-              <span class="status"><span class="dot"></span>в рамках графика</span>
-              <span>Неделя 2</span>
-              <span class="arrow">→</span>
-            </span>
-          </a>
-        </li>
+        <!-- 1. Расчёт ЗП (Кадры) -->
+        <article class="task">
+          <div class="task-head">
+            <span class="t-num">Б1</span>
+            <h3>Расчёт ЗП · контур Кадры</h3>
+            <span class="pill work"><span class="pdot"></span>В работе</span>
+          </div>
+          <p class="lead">Процесс реализован в ИИ-хабе (контур кадров): идёт автоматизированный сбор табелей. База наполнена сотрудниками и РП через интеграции <b>1С</b> и <b>Битрикс24</b>. В пятницу — сверка автоматической сводной таблицы с ручной у Натальи Гвазюк.</p>
 
-        <li>
-          <a class="report-card" href="reports/ii-hab-3.html">
-            <span class="rc-period">8 — 15 июня 2026</span>
-            <h3>Отчёт ИИ-ХАБ</h3>
-            <p class="rc-desc">Прототип и дизайн-система согласованы, очная встреча по БП «Расчёт ЗП» с правками, подписан договор и получены доступы (Битрикс24, e-mail), платформа развёрнута и тестируется.</p>
-            <span class="rc-foot">
-              <span class="status"><span class="dot"></span>в рамках графика</span>
-              <span>Неделя 3</span>
-              <span class="arrow">→</span>
-            </span>
-          </a>
-        </li>
+          <div class="tcols">
+            <div class="tblock">
+              <div class="tlabel">Сделано</div>
+              <ul class="tlist done">
+                <li>Процесс реализован в ИИ-хабе <b>(контур кадров)</b></li>
+                <li>Автоматизированный <b>сбор табелей</b> запущен</li>
+                <li>База наполнена сотрудниками и РП <b>(1С + Б24)</b></li>
+                <li>Приняты правки по табелям</li>
+                <li>Схема связей: <b>объект → РП</b>, табели привязываются к объектам</li>
+              </ul>
+            </div>
+            <div class="tblock">
+              <div class="tlabel">Дальше</div>
+              <ul class="tlist next">
+                <li><b>10 июля</b> — сверка авто-сводной с ручной таблицей Натальи</li>
+                <li><b>13–14 июля</b> — финализация процесса и согласование</li>
+                <li>Контур «Кадры» и расчёт по <b>ООО «Мегаполис»</b></li>
+                <li>Старт тиражирования на другие организации</li>
+              </ul>
+            </div>
+          </div>
 
-        <li>
-          <a class="report-card" href="reports/ii-hab-4.html">
-            <span class="rc-period">16 — 22 июня 2026</span>
-            <h3>Отчёт ИИ-ХАБ</h3>
-            <p class="rc-desc">Платформа развёрнута — первый релиз на стенде. Интеграции Битрикс24, e-mail и 1С подключены, подключён API LLM, схема БП «Расчёт ЗП» (контур кадров) согласована. Идут тестирование и подготовка к демо.</p>
-            <span class="rc-foot">
-              <span class="status"><span class="dot"></span>в рамках графика</span>
-              <span>Неделя 4</span>
-              <span class="arrow">→</span>
-            </span>
-          </a>
-        </li>
+          <div class="milestone">
+            <svg class="m-ic" viewBox="0 0 24 24" fill="none" stroke="#a3141f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="m-body"><span class="m-date">Пт, 10 июля</span>Звонок с Натальей Гвазюк — сравнение автоматической сводной таблицы с ручной.</span>
+          </div>
+        </article>
 
-        <!-- Добавляй новые отчёты сюда -->
-      </ul>
+        <!-- 2. Расчёт ЗП (Финансы) -->
+        <article class="task blocked">
+          <div class="task-head">
+            <span class="t-num">Б2</span>
+            <h3>Расчёт ЗП · контур Финансы</h3>
+            <span class="pill block"><span class="pdot"></span>Блокер</span>
+          </div>
+          <p class="lead">Проведён ресёрч программы <a href="https://fin-ctrl.ru/" target="_blank" rel="noopener">fin-ctrl.ru</a>, которой пользуются финансы. Для старта автоматизации нужны вводные данные от владельца процесса.</p>
+
+          <div class="tcols">
+            <div class="tblock">
+              <div class="tlabel">Сделано</div>
+              <ul class="tlist done">
+                <li>Ресёрч программы <b>fin-ctrl.ru</b> (используется финансами)</li>
+              </ul>
+            </div>
+            <div class="tblock">
+              <div class="tlabel">Блокер</div>
+              <ul class="tlist block">
+                <li>Ожидаем звонок с владельцем процесса — <b>Наталья Цветнова</b></li>
+                <li>Нужны <b>вводные данные</b> для автоматизации</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milestone warn">
+            <svg class="m-ic" viewBox="0 0 24 24" fill="none" stroke="#935710" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="m-body"><span class="m-date">Нужно действие</span>Назначить звонок с Натальей Цветновой и получить вводные для автоматизации.</span>
+          </div>
+        </article>
+
+        <!-- 3. Приём нового сотрудника -->
+        <article class="task">
+          <div class="task-head">
+            <span class="t-num">Б3</span>
+            <h3>Приём нового сотрудника</h3>
+            <span class="pill work"><span class="pdot"></span>В работе</span>
+          </div>
+          <p class="lead">Получены вводные: много времени уходит на ручное внесение данных в документы со сканов. К звонку в пятницу готовим решение для демонстрации и получаем от Натальи Гвазюк описание процесса.</p>
+
+          <div class="tcols">
+            <div class="tblock">
+              <div class="tlabel">Сделано / в работе</div>
+              <ul class="tlist done">
+                <li>Назначен звонок — <b>пятница, 16:00</b>, Наталья Гвазюк</li>
+                <li>Получены вводные: <b>ручное внесение</b> данных со сканов — долго</li>
+                <li>Готовим <b>решение для демонстрации</b> к звонку</li>
+              </ul>
+            </div>
+            <div class="tblock">
+              <div class="tlabel">Дальше</div>
+              <ul class="tlist next">
+                <li>Демонстрация решения и сбор описания процесса</li>
+                <li><b>13–17 июля</b> — завершить автоматизацию процесса</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milestone">
+            <svg class="m-ic" viewBox="0 0 24 24" fill="none" stroke="#a3141f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="m-body"><span class="m-date">Пятница, 16:00</span>Звонок с Натальей Гвазюк — демонстрация решения и описание процесса.</span>
+          </div>
+        </article>
+
+        <!-- 4. Документы ПТО -->
+        <article class="task blocked">
+          <div class="task-head">
+            <span class="t-num">Б4</span>
+            <h3>Работа с документами ПТО</h3>
+            <span class="pill block"><span class="pdot"></span>Блокер</span>
+          </div>
+          <p class="lead">Процесс на старте: чтобы продвинуться, нужен вводный звонок с владельцем. Ольга пока не отвечает — задача заблокирована на этапе назначения встречи.</p>
+
+          <div class="tcols">
+            <div class="tblock">
+              <div class="tlabel">Блокер</div>
+              <ul class="tlist block">
+                <li>Не назначен звонок с <b>Ольгой</b> — не отвечает</li>
+                <li>Без вводного звонка продвижение невозможно</li>
+              </ul>
+            </div>
+            <div class="tblock">
+              <div class="tlabel">Дальше</div>
+              <ul class="tlist next">
+                <li>Назначить звонок и снять вводные по процессу</li>
+                <li>Определить объём и шаги автоматизации</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milestone warn">
+            <svg class="m-ic" viewBox="0 0 24 24" fill="none" stroke="#935710" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="m-body"><span class="m-date">Нужно действие</span>Назначить звонок с Ольгой, чтобы разблокировать процесс.</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 02 · РАЗРАБОТКА ПЛАТФОРМЫ -->
+    <section class="block reveal" style="animation-delay:.22s">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <h2>Разработка платформы</h2>
+        <span class="sec-note">релиз</span>
+      </div>
+
+      <div class="tasks">
+        <article class="task">
+          <div class="task-head">
+            <span class="t-num">П1</span>
+            <h3>Релиз V0.1 Stable</h3>
+            <span class="pill release"><span class="pdot"></span>Релиз 10 июля</span>
+          </div>
+          <p class="lead">Платформа вылита на стенд и проходит тестирование. Готовим первый стабильный релиз <b>V0.1 Stable</b> к пятнице, 10 июля. Release notes опубликуем после релиза.</p>
+
+          <div class="tcols">
+            <div class="tblock">
+              <div class="tlabel">Готово / в работе</div>
+              <ul class="tlist done">
+                <li>Платформа <b>развёрнута</b> на стенде</li>
+                <li>Идёт <b>тестирование</b> перед релизом</li>
+                <li>Стабилизация к сборке <b>V0.1 Stable</b></li>
+              </ul>
+            </div>
+            <div class="tblock">
+              <div class="tlabel">Дальше</div>
+              <ul class="tlist next">
+                <li><b>10 июля</b> — релиз V0.1 Stable</li>
+                <li>Release notes — сразу после релиза</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milestone">
+            <svg class="m-ic" viewBox="0 0 24 24" fill="none" stroke="#a3141f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4"/><path d="m6.34 7.34-2.83-2.83"/><path d="M2 12h4"/><path d="M20.49 4.51 17.66 7.34"/><path d="M22 12h-4"/><circle cx="12" cy="15" r="6"/></svg>
+            <span class="m-body"><span class="m-date">Пт, 10 июля</span>Первый стабильный релиз V0.1 Stable. Release notes — после релиза.</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 03 · ТАЙМЛАЙН -->
+    <section class="block reveal" style="animation-delay:.28s">
+      <details class="archive">
+        <summary>
+          <span class="a-num">03</span>
+          <h2>Таймлайн</h2>
+          <span class="a-count">30 июня — 20 июля</span>
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="arch-body">
+      <div class="gantt-scroll">
+      <div class="gantt">
+        <div class="axis">
+          <div></div>
+          <div class="scale">
+            <span class="first" style="left:0%">30 июня</span>
+            <span style="left:20%">4 июля</span>
+            <span style="left:40%">8 июля</span>
+            <span style="left:60%">12 июля</span>
+            <span style="left:80%">16 июля</span>
+            <span class="last" style="left:100%">20 июля</span>
+          </div>
+        </div>
+        <div class="gbody">
+          <div class="overlay">
+            <div class="gl" style="left:0%"></div>
+            <div class="gl" style="left:20%"></div>
+            <div class="gl" style="left:40%"></div>
+            <div class="gl" style="left:60%"></div>
+            <div class="gl" style="left:80%"></div>
+            <div class="gl" style="left:100%"></div>
+            <div class="today" style="left:35%"></div>
+          </div>
+
+          <div class="ggroup">Бизнес-процессы</div>
+          <div class="grow">
+            <div class="gname">Расчёт ЗП · Кадры — сводная и сверка<small>по 10 июля · сверка с Н. Гвазюк</small></div>
+            <div class="gtrack"><div class="gbar prog" style="left:0%;width:50%"><i style="width:70%"></i></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Расчёт ЗП · Кадры — финализация<small>13 – 14 июля · согласование</small></div>
+            <div class="gtrack"><div class="gbar future" style="left:63%;width:9%"></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Расчёт ЗП · Кадры — тираж на организации<small>с 14 июля · «Мегаполис» → далее</small></div>
+            <div class="gtrack"><div class="gbar tent" style="left:72%;width:28%"></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Расчёт ЗП · Финансы — ожидание вводных<small>блокер · ждём Н. Цветнову</small></div>
+            <div class="gtrack"><div class="gbar blocked" style="left:0%;width:35%"></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Приём сотрудника — вводные и демо<small>по 10 июля · звонок 16:00</small></div>
+            <div class="gtrack"><div class="gbar prog" style="left:15%;width:35%"><i style="width:57%"></i></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Приём сотрудника — автоматизация<small>13 – 17 июля</small></div>
+            <div class="gtrack"><div class="gbar future" style="left:65%;width:20%"></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Документы ПТО — ожидание звонка<small>блокер · звонок не назначен</small></div>
+            <div class="gtrack"><div class="gbar blocked" style="left:0%;width:35%"></div></div>
+          </div>
+
+          <div class="ggroup">Разработка платформы</div>
+          <div class="grow">
+            <div class="gname">Тестирование перед релизом<small>по 10 июля · в работе</small></div>
+            <div class="gtrack"><div class="gbar prog" style="left:0%;width:50%"><i style="width:70%"></i></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Релиз V0.1 Stable<small>10 июля · пятница</small></div>
+            <div class="gtrack"><span class="gmile" style="left:50%"></span></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Стабилизация после релиза<small>с 10 июля</small></div>
+            <div class="gtrack"><div class="gbar future" style="left:50%;width:35%"></div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="gscroll-hint">↔ прокрутите вправо, чтобы увидеть весь график</p>
+
+      <div class="glegend">
+        <span><i class="lg-prog"></i>в работе</span>
+        <span><i class="lg-fut"></i>запланировано</span>
+        <span><i class="lg-tent"></i>далее</span>
+        <span><i class="lg-block"></i>блокер</span>
+        <span><i class="lg-mile"></i>веха</span>
+        <span><i class="lg-today"></i>сегодня · 7 июля</span>
+      </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 04 · АРХИВ -->
+    <section class="block reveal" style="animation-delay:.34s">
+      <details class="archive">
+        <summary>
+          <span class="a-num">04</span>
+          <h2>Архив отчётов</h2>
+          <span class="a-count">4 еженедельных отчёта</span>
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="arch-body">
+          <ul class="report-grid">
+            <li>
+              <a class="report-card" href="reports/ii-hab.html">
+                <span class="rc-period">25 мая — 1 июня 2026</span>
+                <h3>Отчёт ИИ-ХАБ</h3>
+                <p class="rc-desc">Первый этап — «Проектирование и погружение»: прототип, дизайн-система и оцифровка первого бизнес-процесса.</p>
+                <span class="rc-foot">
+                  <span class="status"><span class="dot"></span>в рамках графика</span>
+                  <span>Неделя 1</span>
+                  <span class="arrow">→</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="report-card" href="reports/ii-hab-2.html">
+                <span class="rc-period">1 — 5 июня 2026</span>
+                <h3>Отчёт ИИ-ХАБ</h3>
+                <p class="rc-desc">Завершение первого этапа: прототип и дизайн-система готовы, схема первого бизнес-процесса завершена, начата разработка платформы.</p>
+                <span class="rc-foot">
+                  <span class="status"><span class="dot"></span>в рамках графика</span>
+                  <span>Неделя 2</span>
+                  <span class="arrow">→</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="report-card" href="reports/ii-hab-3.html">
+                <span class="rc-period">8 — 15 июня 2026</span>
+                <h3>Отчёт ИИ-ХАБ</h3>
+                <p class="rc-desc">Прототип и дизайн-система согласованы, очная встреча по БП «Расчёт ЗП» с правками, подписан договор и получены доступы (Битрикс24, e-mail), платформа развёрнута и тестируется.</p>
+                <span class="rc-foot">
+                  <span class="status"><span class="dot"></span>в рамках графика</span>
+                  <span>Неделя 3</span>
+                  <span class="arrow">→</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="report-card" href="reports/ii-hab-4.html">
+                <span class="rc-period">16 — 22 июня 2026</span>
+                <h3>Отчёт ИИ-ХАБ</h3>
+                <p class="rc-desc">Платформа развёрнута — первый релиз на стенде. Интеграции Битрикс24, e-mail и 1С подключены, подключён API LLM, схема БП «Расчёт ЗП» (контур кадров) согласована. Идут тестирование и подготовка к демо.</p>
+                <span class="rc-foot">
+                  <span class="status"><span class="dot"></span>в рамках графика</span>
+                  <span>Неделя 4</span>
+                  <span class="arrow">→</span>
+                </span>
+              </a>
+            </li>
+
+            <!-- Добавляй новые отчёты сюда -->
+          </ul>
+        </div>
+      </details>
     </section>
 
     <!-- FOOTER -->
-    <footer class="page-footer reveal" style="animation-delay:.2s">
+    <footer class="page-footer reveal" style="animation-delay:.4s">
       <div class="fwordmark">ИИ<span class="accent">—</span>ХАБ</div>
       <div class="contact">
         george@oneclick.life<br>
