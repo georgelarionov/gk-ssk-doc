@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Статус задач · 7 июля 2026 (архив) · ГК «ССК» × ИИ-ХАБ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+:root{
+  --bg:#ffffff;
+  --surface:#fbfbfa;
+  --surface-2:#f6f5f3;
+  --border:#ececea;
+  --border-strong:#e1e0dd;
+  --text:#23211e;
+  --text-2:#5b5955;
+  --text-3:#928f8a;
+  --red:#ce1f2d;
+  --red-dark:#a3141f;
+  --red-tint:#fceced;
+  --red-tint-2:#f6d8db;
+  --amber:#bd7415;
+  --amber-dark:#935710;
+  --amber-tint:#fdf3e4;
+  --amber-tint-2:#f1e0c1;
+  --radius:4px;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --sans:"Manrope",-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"ss01","cv11";
+}
+
+.topbar{height:3px;background:var(--red)}
+.wrap{max-width:960px;margin:0 auto;padding:0 28px 96px}
+
+/* ---------- header ---------- */
+.page-header{padding:56px 0 8px}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--red);font-weight:600;display:flex;align-items:center;gap:9px;margin-bottom:18px
+}
+.eyebrow .sep{color:var(--text-3)}
+.eyebrow .muted{color:var(--text-3);font-weight:500}
+.page-header h1{font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.08}
+.page-header h1 .accent{color:var(--red)}
+.subtitle{color:var(--text-2);font-size:16px;margin-top:12px;max-width:560px}
+
+.rule{height:1px;background:var(--border);margin:36px 0}
+
+/* ---------- reports grid ---------- */
+.grid-head{display:flex;align-items:baseline;gap:12px;margin-bottom:22px}
+.grid-head .sec-num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--red)}
+.grid-head h2{font-size:21px;font-weight:700;letter-spacing:-.01em}
+.grid-head .count{font-size:13px;color:var(--text-3);margin-left:auto;font-family:var(--mono)}
+
+.report-grid{
+  list-style:none;display:grid;gap:16px;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr))
+}
+
+.report-card{
+  position:relative;display:flex;flex-direction:column;height:100%;
+  background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);
+  border-radius:var(--radius);padding:22px 24px;text-decoration:none;color:inherit;
+  transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease
+}
+.report-card:hover{
+  border-color:var(--border-strong);border-left-color:var(--red);
+  box-shadow:0 6px 20px rgba(35,33,30,.08);transform:translateY(-2px)
+}
+
+.report-card .rc-period{
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.04em;
+  color:var(--red);text-transform:uppercase;margin-bottom:10px
+}
+.report-card h3{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.report-card .rc-desc{color:var(--text-2);font-size:14px;margin-top:8px;flex:1}
+
+.report-card .rc-foot{
+  display:flex;align-items:center;gap:8px;margin-top:18px;
+  font-family:var(--mono);font-size:11.5px;color:var(--text-3)
+}
+.report-card .status{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--red-tint);border:1px solid var(--red-tint-2);color:var(--red-dark);
+  border-radius:3px;padding:4px 9px;font-weight:600
+}
+.report-card .status .dot{width:6px;height:6px;border-radius:50%;background:var(--red)}
+.report-card .arrow{margin-left:auto;color:var(--text-3);font-size:14px;transition:transform .15s ease,color .15s ease}
+.report-card:hover .arrow{color:var(--red);transform:translateX(3px)}
+
+/* placeholder card for upcoming reports */
+.report-card.soon{
+  border-left-color:var(--border-strong);background:var(--bg);
+  border-style:dashed;cursor:default;color:var(--text-3)
+}
+.report-card.soon:hover{transform:none;box-shadow:none;border-color:var(--border-strong)}
+.report-card.soon h3{color:var(--text-3);font-weight:600}
+
+/* ---------- footer ---------- */
+.page-footer{
+  margin-top:64px;padding-top:28px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px
+}
+.fwordmark{font-size:22px;font-weight:800;letter-spacing:.02em;color:var(--text)}
+.fwordmark .accent{color:var(--red)}
+.contact{font-family:var(--mono);font-size:12.5px;color:var(--text-2);line-height:1.9;text-align:right}
+.contact .muted{color:var(--text-3)}
+
+/* ---------- header meta ---------- */
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.meta .tag{
+  font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--text-2);
+  background:var(--surface-2);border:1px solid var(--border);border-radius:3px;padding:5px 10px
+}
+.meta .tag b{color:var(--text);font-weight:600}
+.meta .tag.live{background:var(--red-tint);border-color:var(--red-tint-2);color:var(--red-dark)}
+.meta .tag.live b{color:var(--red-dark)}
+.meta .tag .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-right:6px;vertical-align:middle;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* ---------- focus callout ---------- */
+.focus{
+  background:var(--red-tint);border:1px solid var(--red-tint-2);border-left:3px solid var(--red);
+  padding:18px 20px;display:flex;gap:14px;align-items:flex-start;margin-bottom:8px
+}
+.focus .ic{flex:none;width:22px;height:22px;margin-top:1px}
+.focus p{font-size:15px;color:#4a2226;line-height:1.6}
+.focus p b{color:var(--red-dark);font-weight:700}
+.focus .flabel{
+  display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--red-dark);font-weight:700;margin-bottom:5px
+}
+
+/* ---------- stats strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+@media(max-width:620px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{
+  background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--red);
+  border-radius:var(--radius);padding:16px 18px 15px
+}
+.stat.warn{border-top-color:var(--amber)}
+.stat .s-num{font-size:27px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.stat .s-num.mono{font-family:var(--mono);font-size:22px}
+.stat.warn .s-num{color:var(--amber-dark)}
+.stat .s-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:var(--text-3);margin-top:9px;line-height:1.4}
+
+/* ---------- section head ---------- */
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
+.sec-head .sec-num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--red)}
+.sec-head h2{font-size:21px;font-weight:700;letter-spacing:-.01em}
+.sec-head .sec-note{font-size:13px;color:var(--text-3);margin-left:auto;font-family:var(--mono)}
+section.block{margin-top:48px}
+
+/* ---------- task cards ---------- */
+.tasks{display:flex;flex-direction:column;gap:16px}
+.task{
+  background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--red);
+  border-radius:var(--radius);padding:22px 24px
+}
+.task.blocked{border-left-color:var(--amber)}
+.task-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.task-head .t-num{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--text-3)}
+.task-head h3{font-size:17px;font-weight:700;letter-spacing:-.01em}
+
+.pill{
+  display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:3px;margin-left:auto
+}
+.pill .pdot{width:6px;height:6px;border-radius:50%}
+.pill.work{background:var(--red-tint);border:1px solid var(--red-tint-2);color:var(--red-dark)}
+.pill.work .pdot{background:var(--red);animation:pulse 2s ease-in-out infinite}
+.pill.block{background:var(--amber-tint);border:1px solid var(--amber-tint-2);color:var(--amber-dark)}
+.pill.block .pdot{background:var(--amber)}
+.pill.release{background:var(--red);border:1px solid var(--red);color:#fff}
+.pill.release .pdot{background:#fff}
+
+.task .lead{font-size:14.5px;color:var(--text);line-height:1.6}
+.task .lead a{color:var(--red-dark);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.task .lead a:hover{color:var(--red)}
+
+/* sub-blocks inside task */
+.tcols{display:grid;grid-template-columns:1fr 1fr;gap:18px 26px;margin-top:16px}
+@media(max-width:560px){.tcols{grid-template-columns:1fr;gap:14px}}
+.tblock .tlabel{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+.tlist{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tlist li{position:relative;padding-left:24px;font-size:14px;color:var(--text-2);line-height:1.5}
+.tlist li b{color:var(--text);font-weight:600}
+.tlist.done li::before{
+  content:"";position:absolute;left:0;top:2px;width:15px;height:15px;
+  background:no-repeat center/15px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ce1f2d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E")
+}
+.tlist.next li::before{
+  content:"";position:absolute;left:1px;top:6px;width:8px;height:8px;border-radius:50%;
+  border:1.5px solid var(--red);background:transparent
+}
+.tlist.block li::before{
+  content:"";position:absolute;left:0;top:2px;width:15px;height:15px;
+  background:no-repeat center/15px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bd7415' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'/%3E%3Cline x1='12' y1='9' x2='12' y2='13'/%3E%3Cline x1='12' y1='17' x2='12.01' y2='17'/%3E%3C/svg%3E")
+}
+
+/* next-event / milestone chip */
+.milestone{display:flex;gap:11px;align-items:center;margin-top:18px;padding:12px 14px;background:var(--red-tint);border:1px solid var(--red-tint-2);border-radius:var(--radius)}
+.milestone.warn{background:var(--amber-tint);border-color:var(--amber-tint-2)}
+.milestone .m-ic{flex:none;width:18px;height:18px}
+.milestone .m-body{font-size:13.5px;line-height:1.45;color:#4a2226}
+.milestone.warn .m-body{color:#4a3410}
+.milestone .m-date{font-family:var(--mono);font-weight:700;color:var(--red-dark);margin-right:7px}
+.milestone.warn .m-date{color:var(--amber-dark)}
+
+/* ---------- gantt ---------- */
+.gantt-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:4px}
+.gantt{min-width:600px}
+.gantt .axis{display:grid;grid-template-columns:214px 1fr}
+.gantt .axis .scale{position:relative;height:16px}
+.gantt .axis .scale span{position:absolute;top:0;font-family:var(--mono);font-size:11px;color:var(--text-3);transform:translateX(-50%);white-space:nowrap}
+.gantt .axis .scale span.first{transform:none}
+.gantt .axis .scale span.last{transform:translateX(-100%)}
+.gantt .axis .scale span.today-lbl{color:var(--red);font-weight:600}
+.gbody{position:relative}
+.gbody .overlay{position:absolute;top:0;bottom:0;left:214px;right:0;pointer-events:none}
+.gbody .overlay .gl{position:absolute;top:0;bottom:0;width:1px;background:var(--border)}
+.gbody .overlay .today{position:absolute;top:0;bottom:0;width:2px;background:var(--red);transform:translateX(-1px)}
+.ggroup{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text-3);margin:18px 0 9px}
+.ggroup:first-of-type{margin-top:10px}
+.grow{display:grid;grid-template-columns:214px 1fr;align-items:center;min-height:36px}
+.grow .gname{font-size:13.5px;color:var(--text);padding-right:16px;line-height:1.2}
+.grow .gname small{display:block;font-size:11px;color:var(--text-3);font-family:var(--mono);margin-top:2px;letter-spacing:.01em}
+.gtrack{position:relative;height:24px}
+.gbar{position:absolute;top:0;height:24px;border-radius:3px;overflow:hidden}
+.gbar.prog{background:var(--red-tint-2)}
+.gbar.prog i{position:absolute;left:0;top:0;bottom:0;background:var(--red)}
+.gbar.future{background:var(--surface-2);border:1px solid var(--border-strong)}
+.gbar.tent{background:repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 5px,#ece9e6 5px,#ece9e6 10px);border:1px solid var(--border-strong)}
+.gbar.blocked{background:repeating-linear-gradient(135deg,var(--amber-tint),var(--amber-tint) 5px,var(--amber-tint-2) 5px,var(--amber-tint-2) 10px);border:1px solid var(--amber-tint-2)}
+.gmile{position:absolute;top:50%;left:0;width:13px;height:13px;background:var(--red);border-radius:2px;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 0 3px var(--red-tint)}
+.glegend{display:flex;flex-wrap:wrap;gap:14px 20px;margin-top:18px;padding-top:15px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text-3)}
+.glegend span{display:inline-flex;align-items:center;gap:7px}
+.glegend i{width:18px;height:11px;border-radius:2px;display:inline-block;flex:none}
+.glegend .lg-prog{background:var(--red)}
+.glegend .lg-fut{background:var(--surface-2);border:1px solid var(--border-strong)}
+.glegend .lg-tent{background:repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 4px,#ece9e6 4px,#ece9e6 8px);border:1px solid var(--border-strong)}
+.glegend .lg-block{background:repeating-linear-gradient(135deg,var(--amber-tint),var(--amber-tint) 4px,var(--amber-tint-2) 4px,var(--amber-tint-2) 8px);border:1px solid var(--amber-tint-2)}
+.glegend .lg-mile{width:12px;height:12px;background:var(--red);border-radius:2px;transform:rotate(45deg);margin:0 2px}
+.glegend .lg-today{width:2px;height:14px;background:var(--red);border-radius:0}
+.gscroll-hint{display:none}
+@media(max-width:640px){
+  .gscroll-hint{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--text-3);margin-top:10px}
+  .gantt-scroll{margin-right:-28px;padding-right:28px}
+}
+
+/* ---------- archive accordion ---------- */
+details.archive{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+details.archive summary{
+  cursor:pointer;list-style:none;padding:18px 22px;display:flex;align-items:center;gap:12px;
+  user-select:none;transition:background .15s ease
+}
+details.archive summary::-webkit-details-marker{display:none}
+details.archive summary:hover{background:var(--surface-2)}
+.archive summary .a-num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--red)}
+.archive summary h2{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.archive summary .a-count{font-family:var(--mono);font-size:12.5px;color:var(--text-3);margin-left:6px}
+.archive summary .chev{margin-left:auto;color:var(--text-3);transition:transform .2s ease}
+details.archive[open] summary .chev{transform:rotate(180deg)}
+.arch-body{padding:4px 22px 24px}
+.arch-body .report-grid{margin-top:4px}
+
+/* ---------- entrance ---------- */
+.reveal{opacity:0;transform:translateY(14px);animation:rise .6s cubic-bezier(.22,.61,.36,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}.meta .tag .dot,.pill .pdot{animation:none}}
+
+/* ---------- backlink (archived snapshot) ---------- */
+.backlink{display:inline-flex;align-items:center;gap:7px;margin:24px 0 0;
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--text-3);text-decoration:none}
+.backlink:hover{color:var(--red)}
+.snapnote{margin:14px 0 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
+  color:var(--amber-dark);background:var(--amber-tint);border:1px solid var(--amber-tint-2);
+  border-radius:3px;padding:6px 11px;display:inline-block}
+
+  </style>
+</head>
+<body>
+  <div class="topbar"></div>
+  <div class="wrap">
+    <a class="backlink" href="../index.html">← К актуальному статусу</a>
+    <div class="snapnote">Архивный снимок · статус на 7 июля 2026</div>
+
+    <!-- HEADER -->
+    <header class="page-header reveal" style="animation-delay:.02s">
+      <div class="eyebrow">ИИ-ХАБ <span class="sep">×</span> ГК «ССК» <span class="sep">·</span> <span class="muted">Статус задач</span></div>
+      <h1>Прогресс <span class="accent">по задачам</span></h1>
+      <p class="subtitle">Живой обзор работ по проекту ИИ-ХАБ. Две линии: оцифровка бизнес-процессов и разработка платформы — с текущим статусом, ближайшими шагами и вехами.</p>
+      <div class="meta">
+        <span class="tag"><b>Обновлено:</b> 7 июля 2026</span>
+        <span class="tag">5 бизнес-процессов</span>
+        <span class="tag live"><span class="dot"></span><b>Релиз V0.1 Stable:</b> 10 июля</span>
+      </div>
+    </header>
+
+    <div class="rule"></div>
+
+    <!-- FOCUS -->
+    <div class="focus reveal" style="animation-delay:.06s">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#ce1f2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      <p>
+        <span class="flabel">Фокус недели · 7 — 11 июля</span>
+        <b>Релиз платформы V0.1 Stable к пятнице 10 июля</b> и финализация БП «Расчёт ЗП» (контур кадров): в пятницу — сверка автоматической сводной таблицы с ручной у Натальи Гвазюк, далее 13–14 июля — согласование и старт тиражирования на другие организации.
+      </p>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats reveal" style="animation-delay:.1s">
+      <div class="stat">
+        <div class="s-num">5</div>
+        <div class="s-lbl">Бизнес-<br>процессов</div>
+      </div>
+      <div class="stat">
+        <div class="s-num">3</div>
+        <div class="s-lbl">В активной<br>работе</div>
+      </div>
+      <div class="stat warn">
+        <div class="s-num">2</div>
+        <div class="s-lbl">Блокера ·<br>нужно действие</div>
+      </div>
+    </div>
+
+    <!-- 01 · БИЗНЕС-ПРОЦЕССЫ -->
+    <section class="block reveal" style="animation-delay:.16s">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <h2>Бизнес-процессы</h2>
+        <span class="sec-note">4 процесса</span>
+      </div>
+
+      <div class="tasks">
+
+        <!-- 1. Расчёт ЗП (Кадры) -->
+        <article class="task">
+          <div class="task-head">
+            <span class="t-num">Б1</span>
+            <h3>Расчёт ЗП · контур Кадры</h3>
+            <span class="pill work"><span class="pdot"></span>В работе</span>
+          </div>
+          <p class="lead">Процесс реализован в ИИ-хабе (контур кадров): идёт автоматизированный сбор табелей. База наполнена сотрудниками и РП через интеграции <b>1С</b> и <b>Битрикс24</b>. В пятницу — сверка автоматической сводной таблицы с ручной у Натальи Гвазюк.</p>
+
+          <div class="tcols">
+            <div class="tblock">
+              <div class="tlabel">Сделано</div>
+              <ul class="tlist done">
+                <li>Процесс реализован в ИИ-хабе <b>(контур кадров)</b></li>
+                <li>Автоматизированный <b>сбор табелей</b> запущен</li>
+                <li>База наполнена сотрудниками и РП <b>(1С + Б24)</b></li>
+                <li>Приняты правки по табелям</li>
+                <li>Схема связей: <b>объект → РП</b>, табели привязываются к объектам</li>
+              </ul>
+            </div>
+            <div class="tblock">
+              <div class="tlabel">Дальше</div>
+              <ul class="tlist next">
+                <li><b>10 июля</b> — сверка авто-сводной с ручной таблицей Натальи</li>
+                <li><b>13–14 июля</b> — финализация процесса и согласование</li>
+                <li>Контур «Кадры» и расчёт по <b>ООО «Мегаполис»</b></li>
+                <li>Старт тиражирования на другие организации</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milestone">
+            <svg class="m-ic" viewBox="0 0 24 24" fill="none" stroke="#a3141f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="m-body"><span class="m-date">Пт, 10 июля</span>Звонок с Натальей Гвазюк — сравнение автоматической сводной таблицы с ручной.</span>
+          </div>
+        </article>
+
+        <!-- 2. Расчёт ЗП (Финансы) -->
+        <article class="task blocked">
+          <div class="task-head">
+            <span class="t-num">Б2</span>
+            <h3>Расчёт ЗП · контур Финансы</h3>
+            <span class="pill block"><span class="pdot"></span>Блокер</span>
+          </div>
+          <p class="lead">Проведён ресёрч программы <a href="https://fin-ctrl.ru/" target="_blank" rel="noopener">fin-ctrl.ru</a>, которой пользуются финансы. Для старта автоматизации нужны вводные данные от владельца процесса.</p>
+
+          <div class="tcols">
+            <div class="tblock">
+              <div class="tlabel">Сделано</div>
+              <ul class="tlist done">
+                <li>Ресёрч программы <b>fin-ctrl.ru</b> (используется финансами)</li>
+              </ul>
+            </div>
+            <div class="tblock">
+              <div class="tlabel">Блокер</div>
+              <ul class="tlist block">
+                <li>Ожидаем звонок с владельцем процесса — <b>Наталья Цветнова</b></li>
+                <li>Нужны <b>вводные данные</b> для автоматизации</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milestone warn">
+            <svg class="m-ic" viewBox="0 0 24 24" fill="none" stroke="#935710" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="m-body"><span class="m-date">Нужно действие</span>Назначить звонок с Натальей Цветновой и получить вводные для автоматизации.</span>
+          </div>
+        </article>
+
+        <!-- 3. Приём нового сотрудника -->
+        <article class="task">
+          <div class="task-head">
+            <span class="t-num">Б3</span>
+            <h3>Приём нового сотрудника</h3>
+            <span class="pill work"><span class="pdot"></span>В работе</span>
+          </div>
+          <p class="lead">Получены вводные: много времени уходит на ручное внесение данных в документы со сканов. К звонку в пятницу готовим решение для демонстрации и получаем от Натальи Гвазюк описание процесса.</p>
+
+          <div class="tcols">
+            <div class="tblock">
+              <div class="tlabel">Сделано / в работе</div>
+              <ul class="tlist done">
+                <li>Назначен звонок — <b>пятница, 16:00</b>, Наталья Гвазюк</li>
+                <li>Получены вводные: <b>ручное внесение</b> данных со сканов — долго</li>
+                <li>Готовим <b>решение для демонстрации</b> к звонку</li>
+              </ul>
+            </div>
+            <div class="tblock">
+              <div class="tlabel">Дальше</div>
+              <ul class="tlist next">
+                <li>Демонстрация решения и сбор описания процесса</li>
+                <li><b>13–17 июля</b> — завершить автоматизацию процесса</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milestone">
+            <svg class="m-ic" viewBox="0 0 24 24" fill="none" stroke="#a3141f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="m-body"><span class="m-date">Пятница, 16:00</span>Звонок с Натальей Гвазюк — демонстрация решения и описание процесса.</span>
+          </div>
+        </article>
+
+        <!-- 4. Документы ПТО -->
+        <article class="task blocked">
+          <div class="task-head">
+            <span class="t-num">Б4</span>
+            <h3>Работа с документами ПТО</h3>
+            <span class="pill block"><span class="pdot"></span>Блокер</span>
+          </div>
+          <p class="lead">Процесс на старте: чтобы продвинуться, нужен вводный звонок с владельцем. Ольга пока не отвечает — задача заблокирована на этапе назначения встречи.</p>
+
+          <div class="tcols">
+            <div class="tblock">
+              <div class="tlabel">Блокер</div>
+              <ul class="tlist block">
+                <li>Не назначен звонок с <b>Ольгой</b> — не отвечает</li>
+                <li>Без вводного звонка продвижение невозможно</li>
+              </ul>
+            </div>
+            <div class="tblock">
+              <div class="tlabel">Дальше</div>
+              <ul class="tlist next">
+                <li>Назначить звонок и снять вводные по процессу</li>
+                <li>Определить объём и шаги автоматизации</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milestone warn">
+            <svg class="m-ic" viewBox="0 0 24 24" fill="none" stroke="#935710" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="m-body"><span class="m-date">Нужно действие</span>Назначить звонок с Ольгой, чтобы разблокировать процесс.</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 02 · РАЗРАБОТКА ПЛАТФОРМЫ -->
+    <section class="block reveal" style="animation-delay:.22s">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <h2>Разработка платформы</h2>
+        <span class="sec-note">релиз</span>
+      </div>
+
+      <div class="tasks">
+        <article class="task">
+          <div class="task-head">
+            <span class="t-num">П1</span>
+            <h3>Релиз V0.1 Stable</h3>
+            <span class="pill release"><span class="pdot"></span>Релиз 10 июля</span>
+          </div>
+          <p class="lead">Платформа вылита на стенд и проходит тестирование. Готовим первый стабильный релиз <b>V0.1 Stable</b> к пятнице, 10 июля. Release notes опубликуем после релиза.</p>
+
+          <div class="tcols">
+            <div class="tblock">
+              <div class="tlabel">Готово / в работе</div>
+              <ul class="tlist done">
+                <li>Платформа <b>развёрнута</b> на стенде</li>
+                <li>Идёт <b>тестирование</b> перед релизом</li>
+                <li>Стабилизация к сборке <b>V0.1 Stable</b></li>
+              </ul>
+            </div>
+            <div class="tblock">
+              <div class="tlabel">Дальше</div>
+              <ul class="tlist next">
+                <li><b>10 июля</b> — релиз V0.1 Stable</li>
+                <li>Release notes — сразу после релиза</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milestone">
+            <svg class="m-ic" viewBox="0 0 24 24" fill="none" stroke="#a3141f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4"/><path d="m6.34 7.34-2.83-2.83"/><path d="M2 12h4"/><path d="M20.49 4.51 17.66 7.34"/><path d="M22 12h-4"/><circle cx="12" cy="15" r="6"/></svg>
+            <span class="m-body"><span class="m-date">Пт, 10 июля</span>Первый стабильный релиз V0.1 Stable. Release notes — после релиза.</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 03 · ТАЙМЛАЙН -->
+    <section class="block reveal" style="animation-delay:.28s">
+      <details class="archive">
+        <summary>
+          <span class="a-num">03</span>
+          <h2>Таймлайн</h2>
+          <span class="a-count">30 июня — 20 июля</span>
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="arch-body">
+      <div class="gantt-scroll">
+      <div class="gantt">
+        <div class="axis">
+          <div></div>
+          <div class="scale">
+            <span class="first" style="left:0%">30 июня</span>
+            <span style="left:20%">4 июля</span>
+            <span style="left:40%">8 июля</span>
+            <span style="left:60%">12 июля</span>
+            <span style="left:80%">16 июля</span>
+            <span class="last" style="left:100%">20 июля</span>
+          </div>
+        </div>
+        <div class="gbody">
+          <div class="overlay">
+            <div class="gl" style="left:0%"></div>
+            <div class="gl" style="left:20%"></div>
+            <div class="gl" style="left:40%"></div>
+            <div class="gl" style="left:60%"></div>
+            <div class="gl" style="left:80%"></div>
+            <div class="gl" style="left:100%"></div>
+            <div class="today" style="left:35%"></div>
+          </div>
+
+          <div class="ggroup">Бизнес-процессы</div>
+          <div class="grow">
+            <div class="gname">Расчёт ЗП · Кадры — сводная и сверка<small>по 10 июля · сверка с Н. Гвазюк</small></div>
+            <div class="gtrack"><div class="gbar prog" style="left:0%;width:50%"><i style="width:70%"></i></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Расчёт ЗП · Кадры — финализация<small>13 – 14 июля · согласование</small></div>
+            <div class="gtrack"><div class="gbar future" style="left:63%;width:9%"></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Расчёт ЗП · Кадры — тираж на организации<small>с 14 июля · «Мегаполис» → далее</small></div>
+            <div class="gtrack"><div class="gbar tent" style="left:72%;width:28%"></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Расчёт ЗП · Финансы — ожидание вводных<small>блокер · ждём Н. Цветнову</small></div>
+            <div class="gtrack"><div class="gbar blocked" style="left:0%;width:35%"></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Приём сотрудника — вводные и демо<small>по 10 июля · звонок 16:00</small></div>
+            <div class="gtrack"><div class="gbar prog" style="left:15%;width:35%"><i style="width:57%"></i></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Приём сотрудника — автоматизация<small>13 – 17 июля</small></div>
+            <div class="gtrack"><div class="gbar future" style="left:65%;width:20%"></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Документы ПТО — ожидание звонка<small>блокер · звонок не назначен</small></div>
+            <div class="gtrack"><div class="gbar blocked" style="left:0%;width:35%"></div></div>
+          </div>
+
+          <div class="ggroup">Разработка платформы</div>
+          <div class="grow">
+            <div class="gname">Тестирование перед релизом<small>по 10 июля · в работе</small></div>
+            <div class="gtrack"><div class="gbar prog" style="left:0%;width:50%"><i style="width:70%"></i></div></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Релиз V0.1 Stable<small>10 июля · пятница</small></div>
+            <div class="gtrack"><span class="gmile" style="left:50%"></span></div>
+          </div>
+          <div class="grow">
+            <div class="gname">Стабилизация после релиза<small>с 10 июля</small></div>
+            <div class="gtrack"><div class="gbar future" style="left:50%;width:35%"></div></div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p class="gscroll-hint">↔ прокрутите вправо, чтобы увидеть весь график</p>
+
+      <div class="glegend">
+        <span><i class="lg-prog"></i>в работе</span>
+        <span><i class="lg-fut"></i>запланировано</span>
+        <span><i class="lg-tent"></i>далее</span>
+        <span><i class="lg-block"></i>блокер</span>
+        <span><i class="lg-mile"></i>веха</span>
+        <span><i class="lg-today"></i>сегодня · 7 июля</span>
+      </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 04 · АРХИВ -->
+    <section class="block reveal" style="animation-delay:.34s">
+      <details class="archive">
+        <summary>
+          <span class="a-num">04</span>
+          <h2>Архив отчётов</h2>
+          <span class="a-count">4 еженедельных отчёта</span>
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="arch-body">
+          <ul class="report-grid">
+            <li>
+              <a class="report-card" href="ii-hab.html">
+                <span class="rc-period">25 мая — 1 июня 2026</span>
+                <h3>Отчёт ИИ-ХАБ</h3>
+                <p class="rc-desc">Первый этап — «Проектирование и погружение»: прототип, дизайн-система и оцифровка первого бизнес-процесса.</p>
+                <span class="rc-foot">
+                  <span class="status"><span class="dot"></span>в рамках графика</span>
+                  <span>Неделя 1</span>
+                  <span class="arrow">→</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="report-card" href="ii-hab-2.html">
+                <span class="rc-period">1 — 5 июня 2026</span>
+                <h3>Отчёт ИИ-ХАБ</h3>
+                <p class="rc-desc">Завершение первого этапа: прототип и дизайн-система готовы, схема первого бизнес-процесса завершена, начата разработка платформы.</p>
+                <span class="rc-foot">
+                  <span class="status"><span class="dot"></span>в рамках графика</span>
+                  <span>Неделя 2</span>
+                  <span class="arrow">→</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="report-card" href="ii-hab-3.html">
+                <span class="rc-period">8 — 15 июня 2026</span>
+                <h3>Отчёт ИИ-ХАБ</h3>
+                <p class="rc-desc">Прототип и дизайн-система согласованы, очная встреча по БП «Расчёт ЗП» с правками, подписан договор и получены доступы (Битрикс24, e-mail), платформа развёрнута и тестируется.</p>
+                <span class="rc-foot">
+                  <span class="status"><span class="dot"></span>в рамках графика</span>
+                  <span>Неделя 3</span>
+                  <span class="arrow">→</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="report-card" href="ii-hab-4.html">
+                <span class="rc-period">16 — 22 июня 2026</span>
+                <h3>Отчёт ИИ-ХАБ</h3>
+                <p class="rc-desc">Платформа развёрнута — первый релиз на стенде. Интеграции Битрикс24, e-mail и 1С подключены, подключён API LLM, схема БП «Расчёт ЗП» (контур кадров) согласована. Идут тестирование и подготовка к демо.</p>
+                <span class="rc-foot">
+                  <span class="status"><span class="dot"></span>в рамках графика</span>
+                  <span>Неделя 4</span>
+                  <span class="arrow">→</span>
+                </span>
+              </a>
+            </li>
+
+            <!-- Добавляй новые отчёты сюда -->
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="page-footer reveal" style="animation-delay:.4s">
+      <div class="fwordmark">ИИ<span class="accent">—</span>ХАБ</div>
+      <div class="contact">
+        george@oneclick.life<br>
+        +7 977 830 18 72<br>
+        @GeorgeLarionov <span class="muted">(TG)</span>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>

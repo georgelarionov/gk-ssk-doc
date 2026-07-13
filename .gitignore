@@ -147,3 +147,4 @@ vite.config.ts.timestamp-*
 
 # Design handoff bundle (исходники дизайна, не часть сайта)
 claude-handoff/
+.claude/settings.local.json
